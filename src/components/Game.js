@@ -29,6 +29,8 @@ const [player, setPlayer] = useState(0)
     const[vinner, setVinner] = useState("")
     const[pcchoice, setPcchoice] = useState(rock)
     const [playerchoice, setPlayerchoice] = useState(rock)
+
+
     const handleClose = () =>setShow(false);
     function sjekkresultat(verdi){
         let winner = ""
@@ -76,10 +78,26 @@ const [player, setPlayer] = useState(0)
                 <Col sm={0} md={0} lg={3}></Col>
             </Row>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} backdrop={"static"}>
+                <Modal.Header closeButton style={{backgroundColor: "lightgrey"}}>
 
-                You chose: <img src={playerchoice}/> <br/>
-                PC chose: <img src={pcchoice}/><br/>
+                </Modal.Header>
+                <Row>
+                    <Col sm={6} md={6} lg={6}>
+                        <h2 style={{textAlign: "center"}}>YOU:</h2>
+                    </Col>
+                    <Col sm={6} md={6} lg={6}>
+                        <h2 style={{textAlign: "center"}}>PC:</h2>
+                    </Col>
+                </Row>
+                <Row>
+                <Col sm={6} md={6} lg={6} style={{}}>
+                 <img src={playerchoice} style={{height: "100%", width: "100%"}}/></Col>
+                <Col sm={6} md={6} lg={6} style={{}}>
+                  <img src={pcchoice} style={{height: "100%", width: "100%"}}/>
+                </Col>
+                </Row>
+                    <br/>
                 <h2>The winner is: {vinner} </h2>
             </Modal>
         </Container>
