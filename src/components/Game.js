@@ -5,6 +5,7 @@ import scissor from "../images/SCISSORS.png"
 import "./game.css"
 import {useState} from "react";
 import {Header} from "./Header";
+import {Scoreboard} from './Scoreboard'
 
 
 
@@ -20,37 +21,54 @@ import {Header} from "./Header";
         name: "scissor",
         beats: "paper"
     }
+
+
 let items = [Rock, Paper, Scissor]
 let pics = [rock, paper, scissor]
+
+
 export const Game = ()=>{
-const [player, setPlayer] = useState(0)
+    const [player, setPlayer] = useState(0)
     const [show, setShow] = useState(false)
     const[pc, setPc] = useState(0)
     const[vinner, setVinner] = useState("")
     const[pcchoice, setPcchoice] = useState(rock)
     const [playerchoice, setPlayerchoice] = useState(rock)
-
-
-    const handleClose = () =>setShow(false);
+    let final = ""
+    const handleClose = () =>setShow(false)
     function sjekkresultat(verdi){
-        let winner = ""
-        let pc = Math.floor(Math.random() * 3)
-        setPcchoice(pics[pc])
+        let pcpick = Math.floor(Math.random() * 3)
+        setPcchoice(pics[pcpick])
         setPlayerchoice(pics[verdi])
-        if(items[verdi].beats === items[pc].name){
+
+        if(items[verdi].beats === items[pcpick].name){
             setPlayer(player => player+1)
             setVinner("player")
+            if(player === 2)final="player"
         }
-        else if(items[pc].beats === items[verdi].name){
+        else if(items[pcpick].beats === items[verdi].name){
             setPc(pc => pc+1)
-            winner = "pc"
             setVinner("pc")
+            if(pc === 2)final="pc"
         }
         else {
-            winner="draw"
             setVinner("draw")
         }
         setShow(true);
+        if(final !== "") {
+            alert(final + " was the winner. Restarting")
+            reset()
+        }
+    }
+
+    const reset =()=>{
+        setPlayer(0)
+        setPc(0)
+        setShow(false)
+        final =""
+        setVinner("")
+
+
     }
 
     return(
@@ -67,20 +85,11 @@ const [player, setPlayer] = useState(0)
                 </Col>
                 <Col sm={0} md={0} lg={3}></Col>
             </Row>
-            <Row style={{height: "50px"}}>
-                <Col sm={0} md={0} lg={3}></Col>
-                <Col sm={6} md={6} lg={3} style={{border: "5px solid", backgroundColor: "lightgrey", textAlign: "center"}}>
-                    <h2> Player: {player}</h2>
-                </Col>
-                <Col sm={6} md={6} lg={3} style={{border: "5px solid", backgroundColor: "lightgrey", textAlign: "center"}}>
-                    <h2>PC: {pc} </h2>
-                </Col>
-                <Col sm={0} md={0} lg={3}></Col>
-            </Row>
+
+            <Scoreboard myprop={{player, pc}}/>
 
             <Modal show={show} onHide={handleClose} backdrop={"static"}>
                 <Modal.Header closeButton style={{backgroundColor: "lightgrey"}}>
-
                 </Modal.Header>
                 <Row>
                     <Col sm={6} md={6} lg={6}>
@@ -91,16 +100,15 @@ const [player, setPlayer] = useState(0)
                     </Col>
                 </Row>
                 <Row>
-                <Col sm={6} md={6} lg={6} style={{}}>
-                 <img src={playerchoice} style={{height: "100%", width: "100%"}}/></Col>
-                <Col sm={6} md={6} lg={6} style={{}}>
-                  <img src={pcchoice} style={{height: "100%", width: "100%"}}/>
-                </Col>
+                    <Col sm={6} md={6} lg={6} style={{}}>
+                        <img src={playerchoice} style={{height: "100%", width: "100%"}}/></Col>
+                    <Col sm={6} md={6} lg={6} style={{}}>
+                        <img src={pcchoice} style={{height: "100%", width: "100%"}}/>
+                    </Col>
                 </Row>
-                    <br/>
+                <br/>
                 <h2>The winner is: {vinner} </h2>
             </Modal>
         </Container>
     )
 }
-
