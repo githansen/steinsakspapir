@@ -59,6 +59,7 @@ export const Game = ()=>{
         setShow(true);
         if(final !== "") {
             setFinalwinner(true)
+
         }
     }
 
@@ -70,7 +71,6 @@ export const Game = ()=>{
         setFinalwinner(false)
 
     }
-        if(!finalwinner) {
             return (
                 <Container>
                     <Row style={{backgroundColor: "grey", height: "100px"}}>
@@ -90,6 +90,9 @@ export const Game = ()=>{
                     </Row>
 
                     <Scoreboard myprop={{player, pc}}/>
+
+                    {!finalwinner ? (
+
 
                     <Modal show={show} onHide={handleClose} backdrop={"static"}>
                         <Modal.Header closeButton style={{backgroundColor: "lightgrey"}}>
@@ -115,21 +118,36 @@ export const Game = ()=>{
                         </Row>
                         <br/>
                         <h2>The winner is: {vinner} </h2>
+
                     </Modal>
+                    ) : (
+                        <Modal show={show} onHide={reset} backdrop={"static"}>
+                            <Modal.Header closeButton style={{backgroundColor: "lightgrey", textAlign: "center"}}>
+                                GAME OVER
+                            </Modal.Header>
+                            <Row>
+                                <Col sm={6} md={6} lg={6} style={{textAlign: "center", fontSize: "25px"}}>
+                                    You: <br/>
+                                    {player}
+                                </Col>
+                                <Col sm={6} md={6} lg={6} style={{textAlign: "center", fontSize: "25px"}}>
+                                    PC: <br/>
+                                    {pc}
+                                </Col>
+                            </Row>
+                            <Row>
+                                {vinner === "player" ?(
+                                    <h1>PLAYER WON</h1>
+                                ) : (
+                                    <h1>PC WON</h1>
+                                )}
+
+
+                            </Row>
+                        </Modal>
+                    )}
                 </Container>
             )
-        }
-        else{
-            return (
-                <Container>
-                    <Row>
-                    <Col sm={2}></Col>
-                    <Col sm={9}><h1>You got {player}, PC got {pc}. {vinner} won. Please start a new game</h1></Col>
-                    </Row>
-                    <Row>
-                    <button className="btn btn-primary" onClick={reset} style={{marginLeft: "45%", width: "150px"}}> Start new game</button>
-                    </Row>
-                </Container>
-            )
-        }
+
+
 }
