@@ -26,7 +26,8 @@ import {Scoreboard} from './Scoreboard'
 let items = [Rock, Paper, Scissor]
 let pics = [rock, paper, scissor]
 
-
+let user = 0
+let pcpick = 0
 export const Game = ()=>{
     const [player, setPlayer] = useState(0)
     const [show, setShow] = useState(false)
@@ -36,11 +37,12 @@ export const Game = ()=>{
     const [playerchoice, setPlayerchoice] = useState(rock)
     let final = ""
     const handleClose = () =>setShow(false)
+    const [finalwinner, setFinalwinner] = useState(false)
     function sjekkresultat(verdi){
-        let pcpick = Math.floor(Math.random() * 3)
+        pcpick = Math.floor(Math.random() * 3)
         setPcchoice(pics[pcpick])
         setPlayerchoice(pics[verdi])
-
+        user=verdi
         if(items[verdi].beats === items[pcpick].name){
             setPlayer(player => player+1)
             setVinner("player")
@@ -56,8 +58,8 @@ export const Game = ()=>{
         }
         setShow(true);
         if(final !== "") {
-            alert(final + " was the winner. Restarting")
             reset()
+            setFinalwinner(true)
         }
     }
 
@@ -66,49 +68,69 @@ export const Game = ()=>{
         setPc(0)
         setShow(false)
         final =""
-        setVinner("")
-
+        setFinalwinner(false)
 
     }
+        if(!finalwinner) {
+            return (
+                <Container>
+                    <Row style={{backgroundColor: "grey", height: "100px"}}>
 
-    return(
-        <Container>
-            <Row style={{backgroundColor: "grey", height: "100px"}}>
+                    </Row>
+                    <Row style={{marginTop: "55px"}}>
+                        <Col sm={0} md={0} lg={3}></Col>
+                        <Col sm={12} md={12} lg={6}>
+                            <img src={rock} alt={'pic of rock'} style={{border: "5px solid", margin: "5px"}} value={0}
+                                 onClick={() => sjekkresultat(0)}/>
+                            <img src={paper} alt={'pic of paper'} style={{border: "5px solid", margin: "5px"}} value={1}
+                                 onClick={() => sjekkresultat(1)}/>
+                            <img src={scissor} alt={'pic of scissor'} style={{border: "5px solid", margin: "5px"}}
+                                 value={2} onClick={() => sjekkresultat(2)}/>
+                        </Col>
+                        <Col sm={0} md={0} lg={3}></Col>
+                    </Row>
 
-            </Row>
-            <Row style={{marginTop: "55px"}}>
-                <Col sm={0} md={0} lg={3}></Col>
-                <Col sm={12} md={12} lg={6}>
-                    <img src={rock} alt={'pic of rock'} style={{border: "5px solid", margin: "5px"}} value={0} onClick={() => sjekkresultat(0)}/>
-                    <img src={paper} alt={'pic of paper'} style={{border: "5px solid", margin: "5px"}} value={1} onClick={() => sjekkresultat(1)}/>
-                    <img src={scissor} alt={'pic of scissor'} style={{border: "5px solid", margin: "5px"}} value={2} onClick={() => sjekkresultat(2)}/>
-                </Col>
-                <Col sm={0} md={0} lg={3}></Col>
-            </Row>
+                    <Scoreboard myprop={{player, pc}}/>
 
-            <Scoreboard myprop={{player, pc}}/>
-
-            <Modal show={show} onHide={handleClose} backdrop={"static"}>
-                <Modal.Header closeButton style={{backgroundColor: "lightgrey"}}>
-                </Modal.Header>
-                <Row>
-                    <Col sm={6} md={6} lg={6}>
-                        <h2 style={{textAlign: "center"}}>YOU:</h2>
-                    </Col>
-                    <Col sm={6} md={6} lg={6}>
-                        <h2 style={{textAlign: "center"}}>PC:</h2>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm={6} md={6} lg={6} style={{}}>
-                        <img src={playerchoice} style={{height: "100%", width: "100%"}}/></Col>
-                    <Col sm={6} md={6} lg={6} style={{}}>
-                        <img src={pcchoice} style={{height: "100%", width: "100%"}}/>
-                    </Col>
-                </Row>
-                <br/>
-                <h2>The winner is: {vinner} </h2>
-            </Modal>
-        </Container>
-    )
+                    <Modal show={show} onHide={handleClose} backdrop={"static"}>
+                        <Modal.Header closeButton style={{backgroundColor: "lightgrey"}}>
+                        </Modal.Header>
+                        <Row>
+                            <Col sm={6} md={6} lg={6} className="d-none d-sm-block">
+                                <h2 style={{textAlign: "center"}}>YOU:</h2>
+                            </Col>
+                            <Col sm={6} md={6} lg={6} className="d-none d-sm-block">
+                                <h2 style={{textAlign: "center"}}>PC:</h2>
+                            </Col>
+                            <Col xs={6} className="d-xs-block d-sm-none d-md-none d-lg-none">You
+                                chose {items[user].name}</Col>
+                            <Col xs={6} className="d-xs-block d-sm-none d-md-none d-lg-none">PC
+                                chose {items[pcpick].name}</Col>
+                        </Row>
+                        <Row>
+                            <Col sm={6} md={6} lg={6} style={{}} className="d-none d-sm-block">
+                                <img src={playerchoice} style={{height: "100%", width: "100%"}}/></Col>
+                            <Col sm={6} md={6} lg={6} style={{}} className="d-none d-sm-block">
+                                <img src={pcchoice} style={{height: "100%", width: "100%"}}/>
+                            </Col>
+                        </Row>
+                        <br/>
+                        <h2>The winner is: {vinner} </h2>
+                    </Modal>
+                </Container>
+            )
+        }
+        else{
+            return (
+                <Container>
+                    <Row>
+                    <Col sm={3}></Col>
+                    <Col sm={6}><h1>{vinner} won, please start a new game</h1></Col>
+                    </Row>
+                    <Row>
+                    <button className="btn btn-primary" onClick={reset} style={{marginLeft: "45%", width: "150px"}}> Start new game</button>
+                    </Row>
+                </Container>
+            )
+        }
 }
