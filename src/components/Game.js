@@ -58,7 +58,6 @@ export const Game = ()=>{
         }
         setShow(true);
         if(final !== "") {
-            reset()
             setFinalwinner(true)
         }
     }
@@ -124,8 +123,8 @@ export const Game = ()=>{
             return (
                 <Container>
                     <Row>
-                    <Col sm={3}></Col>
-                    <Col sm={6}><h1>{vinner} won, please start a new game</h1></Col>
+                    <Col sm={2}></Col>
+                    <Col sm={9}><h1>You got {player}, PC got {pc}. {vinner} won. Please start a new game</h1></Col>
                     </Row>
                     <Row>
                     <button className="btn btn-primary" onClick={reset} style={{marginLeft: "45%", width: "150px"}}> Start new game</button>
