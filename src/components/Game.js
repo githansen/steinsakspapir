@@ -116,7 +116,7 @@ export const Game = ()=>{
                                 <img src={pcchoice} style={{height: "100%", width: "100%"}}/>
                             </Col>
                         </Row>
-                        <br/>
+
                         <h2>The winner is: {vinner} </h2>
 
                     </Modal>

@@ -16,15 +16,9 @@ function App() {
             <Game />
         </Row>
 
-        <Row style={{backgroundColor: "#F8F8F8",
-            borderTop: "1px solid #E7E7E7",
-            textAlign: "center",
-            position: "fixed",
-            bottom: "0",
-            height: "60px",
-            width: "100%"}}>
-            <Footer/>
-        </Row>
+            <Row style={{bottom: "0", position: "absolute", width: "100%"}}>
+            <Footer />
+            </Row>
 
     </Container>
   );
