@@ -91,7 +91,7 @@ export const Game = ()=>{
                     <Row style={{align: "center"}}>
                         <Col xs={4} sm={5} md={5} lg={5}/>
                         <Col>
-                    <button className={'btn'} onClick={reset}>Restart</button>
+                    <button className={'btn'} onClick={reset}>Reset</button>
                         </Col>
                     </Row>
                     <Row style={{margin: "50px"}}>
