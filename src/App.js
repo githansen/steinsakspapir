@@ -16,7 +16,7 @@ function App() {
             <Game />
         </Row>
 
-            <Row style={{bottom: "0", position: "absolute", width: "100%"}}>
+            <Row style={{bottom: "0", position: "fixed", width: "100%"}}>
             <Footer />
             </Row>
 

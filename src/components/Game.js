@@ -73,9 +73,8 @@ export const Game = ()=>{
     }
             return (
                 <Container>
-                    <Row style={{backgroundColor: "grey", height: "100px"}}>
+                    <Row style={{backgroundColor: "lightgrey", height: "75px"}}/>
 
-                    </Row>
                     <Row style={{marginTop: "55px"}}>
                         <Col sm={0} md={0} lg={3}></Col>
                         <Col sm={12} md={12} lg={6}>
@@ -89,8 +88,15 @@ export const Game = ()=>{
                         <Col sm={0} md={0} lg={3}></Col>
                     </Row>
 
+                    <Row style={{align: "center"}}>
+                        <Col xs={4} sm={5} md={5} lg={5}/>
+                        <Col>
+                    <button className={'btn'} onClick={reset}>Restart</button>
+                        </Col>
+                    </Row>
+                    <Row style={{margin: "50px"}}>
                     <Scoreboard myprop={{player, pc}}/>
-
+                    </Row>
                     {!finalwinner ? (
 
 
@@ -111,8 +117,8 @@ export const Game = ()=>{
                         </Row>
                         <Row>
                             <Col sm={6} md={6} lg={6} style={{}} className="d-none d-sm-block">
-                                <img src={playerchoice} style={{height: "100%", width: "100%"}}/></Col>
-                            <Col sm={6} md={6} lg={6} style={{}} className="d-none d-sm-block">
+                                <img src={playerchoice} alt={'Players choice'} style={{height: "100%", width: "100%"}}/></Col>
+                            <Col sm={6} md={6} lg={6} alt={'PCs choice'} style={{}} className="d-none d-sm-block">
                                 <img src={pcchoice} style={{height: "100%", width: "100%"}}/>
                             </Col>
                         </Row>
@@ -137,9 +143,9 @@ export const Game = ()=>{
                             </Row>
                             <Row>
                                 {vinner === "player" ?(
-                                    <h1>PLAYER WON</h1>
+                                    <h1>PLAYER WON </h1>
                                 ) : (
-                                    <h1>PC WON</h1>
+                                    <h1>PC WON </h1>
                                 )}
 
 
