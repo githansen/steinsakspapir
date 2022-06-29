@@ -13,9 +13,10 @@ export const Footer = ()=>{
         textAlign: "center",
         bottom: "0",
         left: "0",
-        height: "60px",
+        height: "100%",
         width: "100%",
-        color: "white"}}>
+        color: "white",
+        marginTop: "100px"}}>
            <h2> FOOTER </h2>
         </div>
     )
