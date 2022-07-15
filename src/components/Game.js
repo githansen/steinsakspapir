@@ -73,7 +73,7 @@ export const Game = ()=>{
     }
             return (
                 <Container>
-                    <Row style={{backgroundColor: "lightgrey", height: "75px"}}/>
+                    <Row style={{backgroundColor: "lightgrey", height: "25px"}}/>
 
                     <Row style={{marginTop: "55px"}}>
                         <Col sm={0} md={0} lg={3}></Col>

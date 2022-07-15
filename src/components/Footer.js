@@ -17,7 +17,7 @@ export const Footer = ()=>{
         width: "100%",
         color: "white",
         marginTop: "100px"}}>
-           <h2> FOOTER </h2>
+           <h2> Footer - test </h2>
         </div>
     )
 }
